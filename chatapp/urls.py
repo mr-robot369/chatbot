@@ -1,8 +1,12 @@
 from django.urls import path
-from .views import HomeView, ChatView, AskQuestionView
+from . import views
 
 urlpatterns = [
-    path('', HomeView, name='home'),
-    path("chatbot/", ChatView, name="chatbot"),  # Add this if 'chatbot' is required
-    path("ask-query/", AskQuestionView, name="ask_query"),
+    path("create-admin/", views.create_admin_user),  # Temporary URL for creating superuser
+    path("", views.home, name="home"),  # Homepage with FAQ section
+    path("chat/", views.chat_with_us, name="chat"),
+    path('get-questions/<int:topic_id>/', views.get_questions, name='get_questions'),
+    path("ask-query/", views.ask_query, name="ask_query"),  # Ask Your Query Form
+    path("feedback/", views.feedback, name="feedback"),  # Feedback Form
+    path("contact/", views.contact, name="contact"),  # Contact Page
 ]

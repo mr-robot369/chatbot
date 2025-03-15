@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="ask-query-page">
+        <div class="ask-query-container">
+            <div class="ask-query-header">
+                <h2>Ask Your Question</h2>
+                <p>Your query will be forwarded to the respective department.</p>
+            </div>
+            <div class="ask-query-form-wrapper">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="question">Your Question:</label>
+                        <textarea name="question" id="question" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Submit Query</button>
+                </form>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
